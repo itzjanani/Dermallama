@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Consultation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header with a doctor-like theme -->
+    <header class="header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='SyntaxSquad.png') }}" alt="Clinic Logo">
+        </div>
+        <h1>Online Dermatology Consultation</h1>
+        <p>Upload your skin image and consult with our AI-powered dermatologist.</p>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <section class="upload-section">
+            <h2>Upload Your Skin Image</h2>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <div id="drop-area" class="drop-box">
+                    <p>Click to upload or paste an image</p>
+                    <input type="file" id="file-input" name="file" accept="image/*" required style="display: none;">
+                </div>
+                <button type="submit" class="btn">Analyze Image</button>
+            </form>
+            <img id="preview" src="" alt="Image Preview" class="image-preview">
+        </section>
+
+        {% if prediction %}
+        <!-- Consultation Section -->
+        <section class="consultation-section">
+            <h2>Diagnosis Result</h2>
+            <div class="result-box">
+                <h3>Your AI Diagnosis: <span id="detected-disease">{{ prediction }}</span></h3>
+                <p>We recommend you consult with a professional dermatologist. In the meantime, ask our AI doctor for advice.</p>
+            </div>
+
+            <!-- Chatbot Section -->
+            <div id="chat-container">
+                <h2>Consult AI Dermatologist</h2>
+                <div id="chatbox">
+                    <div id="chat-content"></div>
+                    <input type="text" id="user-input" placeholder="Ask about symptoms, treatments..." />
+                    <button onclick="sendMessage()" class="btn">Send</button>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; The syntax squad. All rights reserved.</p>
+        <p>&copy; janani,varshini,harish,yuvraj</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+</body>
+</html>
